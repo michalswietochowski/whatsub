@@ -35,7 +35,6 @@
 	NSLog(@"Retrieving subtitles from %@", urlString);
 	NSData* contents = [NSData dataWithContentsOfURL:url options:0 error:&error];
 	
-	[hash retain];
 	*hashPtr = hash;
 	
 	char buffer[4];

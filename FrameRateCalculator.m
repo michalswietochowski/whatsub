@@ -7,7 +7,6 @@
 //
 
 #import "FrameRateCalculator.h"
-#import "RegexKitLite.h"
 
 @implementation FrameRateCalculator
 
@@ -41,7 +40,7 @@
 	//0:01:45:43.21/25 = sign:days:hours:minutes:seconds:timevalue:timescale
 	NSString* QTTimeDurationString = QTStringFromTime(QTTime);
 	
-	NSArray* separated = [QTTimeDurationString componentsSeparatedByRegex:@":"];
+	NSArray* separated = [QTTimeDurationString split:RX(@":")];
 	
 	long days = [[separated objectAtIndex:0] integerValue];
 	long hours = [[separated objectAtIndex:1] integerValue];

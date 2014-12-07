@@ -28,7 +28,6 @@
 		04AF2E91111F6C1000EF0D5C /* 7za in Resources */ = {isa = PBXBuildFile; fileRef = 04AF2E90111F6C1000EF0D5C /* 7za */; };
 		04AFD19513702BBB00AFE116 /* SubtitlesDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AFD19413702BBB00AFE116 /* SubtitlesDownloader.m */; };
 		04C02541140A610B00656AD9 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04E1C25F1406EB7700BA2B97 /* Sparkle.framework */; };
-		04C34A691110C8930080BDEB /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C34A681110C8930080BDEB /* RegexKitLite.m */; };
 		04C34C8111123FEB0080BDEB /* NapiProjektEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C34C8011123FEB0080BDEB /* NapiProjektEngine.m */; };
 		04C54B5C13FFF6D0009EE954 /* Auto Update.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 04C54B5B13FFF6D0009EE954 /* Auto Update.tiff */; };
 		04D04000110F6DB1005DA3B0 /* SubtitlesConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D03FFF110F6DB1005DA3B0 /* SubtitlesConverter.m */; };
@@ -42,6 +41,7 @@
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		903874A71A179D1C00ABCC49 /* RegExCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 903874A61A179D1C00ABCC49 /* RegExCategories.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -85,8 +85,6 @@
 		04AF2E90111F6C1000EF0D5C /* 7za */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = 7za; sourceTree = "<group>"; };
 		04AFD19313702BBB00AFE116 /* SubtitlesDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SubtitlesDownloader.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		04AFD19413702BBB00AFE116 /* SubtitlesDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SubtitlesDownloader.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		04C34A671110C8930080BDEB /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
-		04C34A681110C8930080BDEB /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 		04C34C7F11123FEB0080BDEB /* NapiProjektEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = NapiProjektEngine.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		04C34C8011123FEB0080BDEB /* NapiProjektEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = NapiProjektEngine.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		04C54B5B13FFF6D0009EE954 /* Auto Update.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "Auto Update.tiff"; sourceTree = "<group>"; };
@@ -110,6 +108,8 @@
 		32CA4F630368D1EE00C91783 /* WhatSub_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhatSub_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* WhatSub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhatSub.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		903874A51A179CE500ABCC49 /* RegExCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegExCategories.h; sourceTree = "<group>"; };
+		903874A61A179D1C00ABCC49 /* RegExCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegExCategories.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -264,10 +264,10 @@
 			children = (
 				04A7F79A1120AFCF001DAEE8 /* DBPrefsWindowController.h */,
 				04A7F79B1120AFCF001DAEE8 /* DBPrefsWindowController.m */,
-				04C34A671110C8930080BDEB /* RegexKitLite.h */,
-				04C34A681110C8930080BDEB /* RegexKitLite.m */,
-				32CA4F630368D1EE00C91783 /* WhatSub_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
+				903874A51A179CE500ABCC49 /* RegExCategories.h */,
+				903874A61A179D1C00ABCC49 /* RegExCategories.m */,
+				32CA4F630368D1EE00C91783 /* WhatSub_Prefix.pch */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -320,7 +320,7 @@
 			name = TestWhatSub;
 			productName = TestWhatSub;
 			productReference = 049C19651396793F00123E08 /* TestWhatSub.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 		8D1107260486CEB800E47090 /* WhatSub */ = {
 			isa = PBXNativeTarget;
@@ -347,7 +347,8 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastTestingUpgradeCheck = 0610;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = burningtomato.com;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "WhatSub" */;
@@ -434,10 +435,10 @@
 				04115B390FB6F6C9005E5F74 /* AppController.m in Sources */,
 				04F931600FB8579E003FFCB3 /* FrameRateCalculator.m in Sources */,
 				04D04000110F6DB1005DA3B0 /* SubtitlesConverter.m in Sources */,
-				04C34A691110C8930080BDEB /* RegexKitLite.m in Sources */,
 				04C34C8111123FEB0080BDEB /* NapiProjektEngine.m in Sources */,
 				04A7F79C1120AFCF001DAEE8 /* DBPrefsWindowController.m in Sources */,
 				0471C884124AB368001A567D /* FileHandler.m in Sources */,
+				903874A71A179D1C00ABCC49 /* RegExCategories.m in Sources */,
 				04F72E38126F68BC007C0205 /* AppPreferencesController.m in Sources */,
 				04AFD19513702BBB00AFE116 /* SubtitlesDownloader.m in Sources */,
 				04EBB4FD1371B6E500CC15DF /* AppPreferences.m in Sources */,
@@ -524,6 +525,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -538,6 +541,7 @@
 				GCC_PREFIX_HEADER = WhatSub_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /Applications;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = WhatSub;
 				SDKROOT = macosx;
 			};
@@ -547,7 +551,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -555,12 +560,12 @@
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/Frameworks\"",
 				);
-				GCC_ENABLE_OBJC_GC = required;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = WhatSub_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /Applications;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = WhatSub;
 				SDKROOT = macosx;
 			};
@@ -571,7 +576,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_ENABLE_OBJC_GC = required;
+				GCC_ENABLE_OBJC_GC = "";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -585,7 +590,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_ENABLE_OBJC_GC = required;
+				GCC_ENABLE_OBJC_GC = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				SDKROOT = macosx;
