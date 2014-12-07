@@ -92,13 +92,15 @@ static AppController* instance = nil;
 	[openPanel setCanChooseDirectories:NO];
 	[openPanel setCanCreateDirectories:NO];
 	[openPanel setAllowsMultipleSelection:YES];
+    [openPanel setAllowedFileTypes:allowedFileTypes];
 	[openPanel setTitle:@"Select a file to open..."];
-	
-	if ([openPanel runModalForDirectory:nil file:nil types:allowedFileTypes] == NSOKButton)
-	{
-		NSArray* files = [openPanel filenames];
-		[fileHandler startProcessingFiles:files];
-	}
+    if ([openPanel runModal] == NSFileHandlingPanelOKButton) {
+        NSMutableArray *filenames = [NSMutableArray new];
+        for (NSURL *url in [openPanel URLs]) {
+            [filenames addObject:[url path]];
+        }
+        [fileHandler startProcessingFiles:filenames];
+    }
 }
 
 @end

@@ -57,7 +57,7 @@
         [alert setMessageText:@"Oops..."];
         [alert setInformativeText:errorMessage];
         [alert setAlertStyle:NSWarningAlertStyle];
-        [alert beginSheetModalForWindow:mainWindow modalDelegate:nil didEndSelector:nil contextInfo:nil];
+        [alert beginSheetModalForWindow:mainWindow completionHandler:nil];
     }
     else
     {
