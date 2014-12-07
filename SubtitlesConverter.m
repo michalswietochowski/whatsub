@@ -11,6 +11,7 @@
 
 @implementation SubtitlesConverter
 
+NSString *const SRT_REGEX = @"^(\\d+):(\\d+):(\\d+),(\\d+)\\s-->\\s(\\d+):(\\d+):(\\d+),(\\d+)";
 NSString *const TMP_REGEX = @"^(\\d+):(\\d+):(\\d+):(.*)";
 NSString *const MDVD_REGEX = @"^\\{(\\d+)\\}\\{(\\d+)\\}(.*)";
 NSString *const MPL2_REGEX = @"^\\[(\\d+)\\]\\[(\\d+)\\](.*)";
@@ -25,56 +26,53 @@ NSString *const MPL2_REGEX = @"^\\[(\\d+)\\]\\[(\\d+)\\](.*)";
     return self;
 }
 
-- (void)convert:(NSString*)inputPath toFile:(NSString*)outputPath forMovie:(NSString*)moviePath withEncoding:(NSStringEncoding)encoding
-{	
-	NSLog(@"Processing file %@", inputPath);
-	NSArray* fileContents = [self readFile:inputPath];
-    
-	NSString* firstLine = [fileContents objectAtIndex:0];
-    NSArray* subRipArray = nil;
-    
-    if ([[firstLine captureComponentsMatchedByRegex:TMP_REGEX] count] > 0)
-    {
-        subRipArray = [self processTMPlayer:fileContents];
-    }
-    else if ([[firstLine captureComponentsMatchedByRegex:MDVD_REGEX] count] > 0)
-    {
-        if (moviePath == nil)
-        {
-            NSString* partialPath = [inputPath stringByDeletingPathExtension];
-            for (NSString* ext in movieExtensions)
-            {
-                NSString* path = [partialPath stringByAppendingPathExtension:ext];
-                if ([[NSFileManager defaultManager] fileExistsAtPath:path])
-                {
-                    NSLog(@"Movie file found at %@", path);
-                    moviePath = path;
-                    break;
 - (void)convert:(NSString *)inputPath toFile:(NSString *)outputPath forMovie:(NSString *)moviePath withEncoding:(NSStringEncoding)encoding
 {
     NSLog(@"Processing file %@", inputPath);
     NSArray *fileContents = [self readFile:inputPath];
 
+    NSString *line = nil;
+    NSArray *subRipArray = nil;
+
+    //check first 3 lines for format detection
+    for (int i = 0; i < 20; ++i) {
+        line = [fileContents objectAtIndex:i];
+
+        //line too short to even test it with regex
+        if ([line length] < 6) {
+            continue;
+        }
+
+        if ([line isMatch:RX(SRT_REGEX)]) {
+            //file is already in SRT format, just output with proper character encoding
+            [self printNonConverted:fileContents toFile:outputPath withEncoding:encoding];
+            return;
+        } else if ([line isMatch:RX(TMP_REGEX)]) {
+            subRipArray = [self processTMPlayer:fileContents];
+        } else if ([line isMatch:RX(MDVD_REGEX)]) {
+            if (moviePath == nil) {
+                NSString *partialPath = [inputPath stringByDeletingPathExtension];
+                for (NSString *ext in movieExtensions) {
+                    NSString *path = [partialPath stringByAppendingPathExtension:ext];
+                    if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+                        NSLog(@"Movie file found at %@", path);
+                        moviePath = path;
+                        break;
+                    }
                 }
             }
+            subRipArray = [self processMicroDVD:fileContents forMovie:moviePath];
+        } else if ([line isMatch:RX(MPL2_REGEX)]) {
+            subRipArray = [self processMPL2:fileContents];
         }
-        subRipArray = [self processMicroDVD:fileContents forMovie:moviePath];
     }
-    else if ([[firstLine captureComponentsMatchedByRegex:MPL2_REGEX] count] > 0)
-    {
-        subRipArray = [self processMPL2:fileContents];
-    }
-    else
-    {
-        NSString* reason = @"Unknown subtitles format";
-        NSException* e = [NSException exceptionWithName:@"SubtitlesException" reason:reason userInfo:nil];
+
+    if (subRipArray == nil) {
+        NSString *reason = @"Unknown subtitles format";
+        NSException *e = [NSException exceptionWithName:@"SubtitlesException" reason:reason userInfo:nil];
         @throw e;
     }
-    
-    if (subRipArray != nil)
-    {        
-        [self printSubRip:subRipArray toFile:outputPath withEncoding:encoding];
-    }
+    [self printSubRip:subRipArray toFile:outputPath withEncoding:encoding];
 }
 
 - (void)convertWithoutProcessing:(NSString *)inputPath toFile:(NSString *)outputPath withEncoding:(NSStringEncoding)encoding
@@ -253,6 +251,13 @@ NSString *const MPL2_REGEX = @"^\\[(\\d+)\\]\\[(\\d+)\\](.*)";
         [entireText appendString:linePrint];
     }
 
+    NSData *data = [entireText dataUsingEncoding:encoding allowLossyConversion:YES];
+    [data writeToFile:srtFilePath atomically:YES];
+}
+
+- (void)printNonConverted:(NSArray *)input toFile:(NSString *)srtFilePath withEncoding:(NSStringEncoding)encoding
+{
+    NSString *entireText = [input componentsJoinedByString:@""];
     NSData *data = [entireText dataUsingEncoding:encoding allowLossyConversion:YES];
     [data writeToFile:srtFilePath atomically:YES];
 }
