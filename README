@@ -4,6 +4,10 @@ WhatSub is a subtitles downloader and converter. It downloads subtitles from the
 
 It is a Mac OS X application written purely in Obj-C.
 
+Version 1.2
+* detecting input SRT subtitle format
+* some code upgrades (ARC, using built in regex library instead of RegexKit)
+
 Version 1.1.3
 * github address change (means no actual changes)
 
